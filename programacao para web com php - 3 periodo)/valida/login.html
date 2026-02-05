@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="js/valida.js"></script>
+	<title>Formulário de cadastro</title>
+</head>
+<body>
+	<h2>Formulário de cadastro</h2>
+	<form name="formulario" method="post" action="recebe.html">
+
+		<p>
+			<label for="nome">Nome:</label><br>
+			<input type="text" name="nome" id="nome" placeholder="Seu nome">
+			<hr>
+		</p>
+
+		<p>
+			<label for="email">E-mail:</label><br>
+			<input type="email" name="email" id="email" placeholder="nome@empresa.com.br">
+			<hr>
+		</p>
+
+		<p>
+			<label for="telefone">Telefone:</label><br>
+			<input type="tel" name="telefone" id="telefone" placeholder="(00) 9.9999.9999">
+			<hr>
+		</p>
+
+		<p>
+			<label for="endereco">Endereço:</label><br>
+			<input type="text" name="endereco" id="endereco" placeholder="Rua, Nº, bairro, etc...">
+			<hr>
+		</p>
+
+		<p>
+			<label for="senha">Senha:</label><br>
+			<input type="password" name="senha" id="senha" placeholder="••••••••">
+			<hr>
+		</p>
+		<p>
+			<input type="button" name="enviar" value="Enviar formulário" onclick="valida(formulario); envia();">
+		</p>
+
+	</form>
+</body>
+</html>

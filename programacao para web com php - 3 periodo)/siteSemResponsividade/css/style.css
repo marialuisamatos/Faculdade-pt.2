@@ -1,0 +1,144 @@
+/* =========== GERAL =========== */
+
+body {
+	margin: 0;
+	font-family: 'arial';
+}
+
+.container {
+	max-width: 1152px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+/*	background: beige;*/
+}
+
+/* =========== CABEÇALHO =========== */
+
+header {
+	background: #24388b;
+	padding: 10px 0;
+}
+
+h1 {
+	margin: 0;
+}
+
+ul {
+	margin: 36px 0 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+li {
+	display: inline;
+	margin: 0 16px 0 0;
+}
+
+li:last-child {
+	margin: 0;
+}
+
+li a {
+	color: #fff;
+	text-decoration: none;
+	transition: color 0.3s;
+}
+
+li a:hover {
+	color: cyan;
+	transition: color 0.3s;
+}
+
+li a span {
+	color: cyan;
+	font-size: 14px;
+	display: inline-block;
+	transform: rotate(-180deg);
+	transition: transform 0.3s;
+}
+
+li:hover a span {
+	transform: rotate(0);
+	transition: transform 0.3s;
+}
+
+/* =========== SEÇÃO 1 =========== */
+
+.blocoFigura {
+	width: 360px;
+	margin-top: 50px;
+}
+
+.blocoFigura figure {
+	margin: 0;
+}
+
+.blocoFigura figure img {
+	max-width: 100%;
+}
+
+.blocoFigura h2 {
+	margin: 5px 0 0 0;
+	text-align: center;
+}
+
+.blocoFigura a {
+	text-decoration: none;
+	color: #2593d1;
+	opacity: 1;
+	transition: opacity 0.3s;
+}
+
+.blocoFigura a:hover {
+	opacity: 0.7;
+	transition: opacity 0.3s;
+}
+
+/* =========== SEÇÃO 2 =========== */
+
+.container2 {
+	max-width: 1152px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+h3 {
+	width: 1152px;
+	text-align: center;
+	margin-top: 40px;
+	margin-bottom: 10px;
+	font-size: 40px;
+}
+
+p {
+	width: 560px;
+	text-align: justify;
+	font-size: 20px;
+}
+
+/* =========== SEÇÃO 3 =========== */
+
+iframe {
+	width: 1152px;
+	height: 450px;
+	border: 0;
+	margin-top: 20px;
+}
+
+/* =========== RODAPÉ =========== */
+
+footer {
+	background: #24388b;
+	margin-top: 50px;
+}
+
+h4 {
+	color: #fff;
+	font-size: 20px;
+}
+
+
+

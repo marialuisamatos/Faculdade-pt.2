@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Presença - Professor</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+  <!-- Cabeçalho -->
+  <header class="bg-indigo-700 text-white p-4 flex justify-between items-center shadow-md">
+    <h1 class="text-2xl font-bold">📚 Gerenciamento de Presenças</h1>
+    <div class="flex items-center gap-4">
+      <span>Professor(a): <strong>João Silva</strong></span>
+      <button class="bg-red-500 hover:bg-red-600 px-3 py-1 rounded-lg text-sm">Sair</button>
+    </div>
+  </header>
+
+  <!-- Conteúdo -->
+  <main class="flex-1 p-6 max-w-6xl mx-auto">
+    
+    <!-- Seleção de Turma -->
+    <div class="mb-6">
+      <label for="turma" class="block mb-2 text-gray-700 font-semibold">Selecione a Turma:</label>
+      <select id="turma" class="w-72 p-2 border rounded-lg shadow-sm focus:ring focus:ring-indigo-300">
+        <option>-- Escolha uma turma --</option>
+        <option value="turmaA">Turma A</option>
+        <option value="turmaB">Turma B</option>
+        <option value="turmaC">Turma C</option>
+      </select>
+    </div>
+
+    <!-- Lista de Alunos -->
+    <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+      <table class="w-full border-collapse">
+        <thead>
+          <tr class="bg-indigo-100 text-gray-700">
+            <th class="p-3 text-left">Foto</th>
+            <th class="p-3 text-left">Nome</th>
+            <th class="p-3 text-left">Presença</th>
+            <th class="p-3 text-left">Justificativa</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Aluno 1 -->
+          <tr class="border-b hover:bg-gray-50">
+            <td class="p-3">
+              <img src="https://via.placeholder.com/40" alt="Foto Aluno" class="w-10 h-10 rounded-full">
+            </td>
+            <td class="p-3 font-medium">Maria Silva</td>
+            <td class="p-3">
+              <div class="flex gap-3">
+                <label class="flex items-center gap-1 text-green-600">
+                  <input type="radio" name="aluno1" value="presente"> Presente
+                </label>
+                <label class="flex items-center gap-1 text-red-600">
+                  <input type="radio" name="aluno1" value="falta"> Falta
+                </label>
+                <label class="flex items-center gap-1 text-blue-600">
+                  <input type="radio" name="aluno1" value="justificada"> Justificada
+                </label>
+              </div>
+            </td>
+            <td class="p-3">
+              <input type="text" placeholder="Motivo da falta" class="w-full border rounded-lg p-2 text-sm justificativa" disabled>
+            </td>
+          </tr>
+
+          <!-- Aluno 2 -->
+          <tr class="border-b hover:bg-gray-50">
+            <td class="p-3">
+              <img src="https://via.placeholder.com/40" alt="Foto Aluno" class="w-10 h-10 rounded-full">
+            </td>
+            <td class="p-3 font-medium">Pedro Souza</td>
+            <td class="p-3">
+              <div class="flex gap-3">
+                <label class="flex items-center gap-1 text-green-600">
+                  <input type="radio" name="aluno2" value="presente"> Presente
+                </label>
+                <label class="flex items-center gap-1 text-red-600">
+                  <input type="radio" name="aluno2" value="falta"> Falta
+                </label>
+                <label class="flex items-center gap-1 text-blue-600">
+                  <input type="radio" name="aluno2" value="justificada"> Justificada
+                </label>
+              </div>
+            </td>
+            <td class="p-3">
+              <input type="text" placeholder="Motivo da falta" class="w-full border rounded-lg p-2 text-sm justificativa" disabled>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Botões de Ação -->
+    <div class="mt-6 flex gap-4">
+      <button id="salvar" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg shadow">
+        💾 Salvar Presenças
+      </button>
+      <button id="marcarTodos" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg shadow">
+        ✅ Marcar Todos como Presentes
+      </button>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-5 right-5 hidden bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg"></div>
+
+  </main>
+
+  <!-- Script -->
+  <script>
+    // Habilitar/desabilitar justificativas
+    document.querySelectorAll("tbody tr").forEach((row) => {
+      const radios = row.querySelectorAll("input[type=radio]");
+      const justificativaInput = row.querySelector(".justificativa");
+
+      radios.forEach((radio) => {
+        radio.addEventListener("change", () => {
+          if (radio.value === "justificada" && radio.checked) {
+            justificativaInput.disabled = false;
+            justificativaInput.focus();
+          } else {
+            justificativaInput.disabled = true;
+            justificativaInput.value = "";
+          }
+        });
+      });
+    });
+
+    // Marcar todos como presentes
+    document.getElementById("marcarTodos").addEventListener("click", () => {
+      document.querySelectorAll("tbody tr").forEach((row) => {
+        const presenteRadio = row.querySelector("input[value=presente]");
+        const justificativaInput = row.querySelector(".justificativa");
+
+        if (presenteRadio) presenteRadio.checked = true;
+        if (justificativaInput) {
+          justificativaInput.disabled = true;
+          justificativaInput.value = "";
+        }
+      });
+    });
+
+    // Salvar presenças
+    document.getElementById("salvar").addEventListener("click", () => {
+      const registros = [];
+      let todosPreenchidos = true;
+
+      document.querySelectorAll("tbody tr").forEach((row, index) => {
+        const nome = row.querySelector("td:nth-child(2)").innerText;
+        const radios = row.querySelectorAll("input[type=radio]");
+        const justificativaInput = row.querySelector(".justificativa");
+
+        let status = null;
+        radios.forEach((radio) => {
+          if (radio.checked) status = radio.value;
+        });
+
+        if (!status) {
+          todosPreenchidos = false;
+        } else {
+          registros.push({
+            aluno: nome,
+            status: status,
+            justificativa: justificativaInput.value || null
+          });
+        }
+      });
+
+      if (!todosPreenchidos) {
+        showToast("❌ Preencha a presença de todos os alunos", "red");
+      } else {
+        console.log("📤 Dados enviados:", registros);
+        showToast("✅ Presenças salvas com sucesso!", "green");
+        // Aqui você pode trocar pelo fetch() para enviar ao backend
+      }
+    });
+
+    // Função toast
+    function showToast(msg, color) {
+      const toast = document.getElementById("toast");
+      toast.textContent = msg;
+      toast.className = `fixed bottom-5 right-5 bg-${color}-600 text-white px-4 py-2 rounded-lg shadow-lg`;
+      toast.classList.remove("hidden");
+
+      setTimeout(() => {
+        toast.classList.add("hidden");
+      }, 3000);
+    }
+  </script>
+
+</body>
+</html>
